@@ -33,10 +33,12 @@ class CancerCompass(scrapy.Spider):
 		author_name_xpath = "//table[@class='node node-forum']//div[@class='author']/text()"
 		submitted_date_xpath = "//table[@class='node node-forum']//div[@class='submitted']/text()"
 		all_text_data_xpath = "//table[@class='node node-forum']//div[@class='content']/p/text()"
+		topic_xpath = "//div[@id='squeeze']/div/div/h2/text()"
 
 		item = PostItemsList()
 		item['author'] = response.xpath(author_name_xpath).extract()[0]
 		item['author_link'] = ''
+		item['topic'] = response.xpath(topic_xpath).extract()
 		item['condition']="chronic lymphocytic leukemia"
 		item['create_date'] = response.xpath(submitted_date_xpath).extract()[0]
 		item['url'] = response.url
